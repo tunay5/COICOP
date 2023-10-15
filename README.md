@@ -1,34 +1,67 @@
-Untitled
-================
-2023-10-15
 
-## R Markdown
+# COICOP Package
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
+The main purpose of this package is to receive different kinds of
+datasets and return a dataframe labeled as “data” in the users global
+environment, which includes an additional column that classifies the
+COICOP codes based on the four classes (Durables, Semi-Durables,
+Non-Durables and Services)
 
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+## Install Package
+
+First, you have to install devtools package
 
 ``` r
-summary(cars)
+install.packages("devtools", repos ="http://cran.us.r-project.org")
+library(devtools)
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+And then you can download COICOP package by tools that devtools provides
 
-## Including Plots
+``` r
+install_github("tunay5/COICOP")
+library(coicopproj)
+```
 
-You can also embed plots, for example:
+## classified_data()
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
+The usage of classified_data() is simple. One has to put the data that
+it wants to be classified between brackets.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+Assume that we have a consumption dataset for an individual:
+
+``` r
+data_1
+```
+
+    ##       value codes
+    ## 1  5.593052  6212
+    ## 2  6.232743  7322
+    ## 3  7.437120  9112
+    ## 4  9.449247  9150
+    ## 5  5.210092 11111
+    ## 6  9.390338  4549
+    ## 7  9.668052  1113
+    ## 8  7.964787  1181
+    ## 9  7.774684  1212
+    ## 10 4.370718  4210
+    ## 11 5.235847  4310
+
+To classify these COICOP codes, we will use classified_data
+
+``` r
+classified_data(data_1)
+```
+
+    ##       value codes class_4
+    ## 1  5.593052  6212       S
+    ## 2  6.232743  7322       S
+    ## 3  7.437120  9112       D
+    ## 4  9.449247  9150       S
+    ## 5  5.210092 11111       S
+    ## 6  9.390338  4549      ND
+    ## 7  9.668052  1113      ND
+    ## 8  7.964787  1181      ND
+    ## 9  7.774684  1212      ND
+    ## 10 4.370718  4210       S
+    ## 11 5.235847  4310      ND
