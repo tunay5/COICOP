@@ -20,7 +20,7 @@ And then you can download COICOP package by tools that devtools provides
 
 ``` r
 install_github("tunay5/COICOP")
-library(coicopproj)
+library(coicop)
 ```
 
 ## classified_data()
